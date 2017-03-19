@@ -20,8 +20,6 @@ def index():
 
 @app.route('/vigenere', methods=['POST'])
 def vigenere():
-    SOLUTIONS_COUNT_LIMIT = 1000
-
     vig = Vigenere()
 
     key = request.form.get('key')
@@ -34,9 +32,6 @@ def vigenere():
     if key and encrypt_text:
         solution = vig.decrypt(encrypt_text, key)
 
-        if len(solution['keys']) >= SOLUTIONS_COUNT_LIMIT:
-            solution = {'error': 'Solutions count > {}'.format(SOLUTIONS_COUNT_LIMIT)}
-
     elif encrypt_text:
         solution = vig.vigenering(
             encrypt_text=encrypt_text,
@@ -44,9 +39,6 @@ def vigenere():
             symbol_repeats_min_count=symbol_repeats_min_count,
             key_length=key_length
         )
-
-        if len(solution['keys']) >= SOLUTIONS_COUNT_LIMIT:
-            solution = {'error': 'Solutions count > {}'.format(SOLUTIONS_COUNT_LIMIT)}
 
     else:
         solution = {'error': 'Invalid params'}

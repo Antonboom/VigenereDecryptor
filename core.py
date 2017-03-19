@@ -49,7 +49,10 @@ class Vigenere:
             sys.stdout = open(stdout_filename, 'w')
 
     def encrypt(self, text, key):
-        pass
+        spaces_positions = self._get_spaces_positions(text)
+        text = self._prepare_text(text)
+        encrypt_text = self._encrypt(text, key)
+        return self._insert_char(encrypt_text, ' ', spaces_positions)
 
     def decrypt(self, encrypt_text, key, spaces_positions=None):
         if not spaces_positions:
@@ -265,7 +268,7 @@ class Vigenere:
         return ''.join(clean_text)
 
     def _symbols_addition(self, sybmol_a, symbol_b):
-        return self.alphabet[self.alphabet.index(sybmol_a) + self.alphabet.index(symbol_b) % self.alphabet_length]
+        return self.alphabet[(self.alphabet.index(sybmol_a) + self.alphabet.index(symbol_b)) % self.alphabet_length]
 
     def _symbols_subtraction(self, sybmol_a, symbol_b):
         return self.alphabet[self.alphabet.index(sybmol_a) - self.alphabet.index(symbol_b)]
