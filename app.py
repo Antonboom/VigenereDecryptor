@@ -54,5 +54,9 @@ def vigenere():
     return Response(json.dumps(solution), content_type='application/json')
 
 
+def gunicorn():
+    return app
+
+
 if __name__ == "__main__":
     app.run(debug=True)
