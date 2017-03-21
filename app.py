@@ -30,7 +30,7 @@ def vigenere():
     key_length = int(request.form.get('key_length') or 0)
 
     if key and encrypt_text:
-        solution = vig.decrypt(encrypt_text, key)
+        solution = vig.decrypt(encrypt_text, key.lower())
 
     elif encrypt_text:
         solution = vig.vigenering(
